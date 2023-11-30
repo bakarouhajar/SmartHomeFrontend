@@ -1,0 +1,38 @@
+<h3 class="ms-5 p-3 text-center">Gestionnaire des catégories</h3>
+<div class="p-5">
+  <form class="form" (ngSubmit)="ngSubmit()">
+    <div class="form-group">
+      <label for="label">Label</label>
+      <input type="text" class="form-control w-50" id="label" name="label" placeholder="label"
+        [(ngModel)]="categories.label">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control w-50" id="description" name="description" placeholder="description"
+        [(ngModel)]="categories.description">
+    </div>
+    <button type="submit" class="btn btn-outline-success mt-3">Ajouter</button>
+  </form>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="background-color: rgb(86, 140, 220);">Label</th>
+      <th scope="col" style="background-color: rgb(86, 140, 220);">Liste des appareils</th>
+      <th scope="col" style="background-color: rgb(86, 140, 220);">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let categories of categorie">
+      <td>{{categories.label}}</td>
+      <td>
+        <span *ngFor="let appareil of appareil">{{ appareil.name }}, </span>
+      </td>
+      <td>
+        <button (click)="deleteCategorie(categories.id)" class="btn btn-outline-danger me-2">Delete</button>
+        <button (click)="updateCategorie(categories.id)" class="btn btn-outline-secondary">Update</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

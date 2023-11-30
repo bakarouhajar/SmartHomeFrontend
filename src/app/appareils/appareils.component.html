@@ -1,0 +1,57 @@
+
+<h3 class="ms-5 p-3 text-center">Gestionnaire des appareils</h3>
+<div class="p-5 text-center"> 
+  <button class="btn btn-outline-primary" (click)="showForm = true">Ajouter un appareil</button>
+</div>
+
+<div *ngIf="showForm" class="p-5">
+  <form class="form" name="registerForm" (ngSubmit)="ngSubmit()">
+    <div class="form-group">
+      <label for="label">Name</label>
+      <input type="text" class="form-control" id="label" placeholder="name" [(ngModel)]="appareils.name" name="label">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" placeholder="description" [(ngModel)]="appareils.description" name="description">
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      
+      <input type="number" min="0" max="1" class="form-control" id="state" placeholder="state" [(ngModel)]="appareils.state" name="state">
+    </div>
+    <div class="form-group">
+      <label for="categories">Category</label>
+      <select class="form-select" id="categories" [(ngModel)]="appareils.categories" name="categories">
+        <option value="" disabled selected>Sélectionnez une catégorie</option>
+        <option *ngFor="let category of categorie" [value]="category.id">{{ category.id }} - {{category.label}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-outline-success mt-3">Ajouter</button>
+  </form>
+</div>
+
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col" style="background-color: rgb(86, 140, 220);">Name</th>
+      <th scope="col" style="background-color:rgb(86, 140, 220);">Description</th>
+      <th scope="col" style="background-color:rgb(86, 140, 220);">State</th>
+      <th scope="col" style="background-color:rgb(86, 140, 220);">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let appareils of appareil">
+      <td>{{appareils.name}}</td>
+      <td>{{appareils.description}}</td>
+      <td [ngClass]="{'text-danger': appareils.state === false, 'text-success': appareils.state === true}">{{appareils.state}}</td>
+      <td>
+        <button class="btn btn-outline-danger me-2" (click)="deleteAppareil(appareils.id)">Supprimer</button>
+        <button class="btn btn-outline-secondary" (click)="updateAppareils(appareils.id)">Modifier</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
